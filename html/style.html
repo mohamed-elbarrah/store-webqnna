@@ -803,18 +803,24 @@
   /* Applies a subtle moving "shine" and lift on hover while preserving
      each button's existing colors and shapes. Add the class `no-shine`
      to any element to opt-out. */
+  /* target anchors, inputs, and common custom button wrappers */
   button,
   input[type="button"],
   input[type="submit"],
   a.button,
   a[role="button"],
+  .donate-btn,
   .donate-btn a,
+  .cart-donate-btn,
+  .cart-donate-btn a,
   .donate-btn-e,
+  .btn_share,
+  .btns-share .btn_share,
   .card-form button,
   .spinner-btn {
     position: relative;
     overflow: hidden;
-    transition: transform .18s ease-in-out, box-shadow .18s ease-in-out;
+    transition: box-shadow .18s ease-in-out, filter .18s ease-in-out;
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -823,8 +829,12 @@
   input[type="button"]::before,
   input[type="submit"]::before,
   a.button::before,
+  .donate-btn::before,
   .donate-btn a::before,
+  .cart-donate-btn::before,
+  .cart-donate-btn a::before,
   .donate-btn-e::before,
+  .btn_share::before,
   .card-form button::before,
   .spinner-btn::before {
     content: "";
@@ -838,18 +848,21 @@
     pointer-events: none;
   }
 
-  /* lift + shadow on hover */
+  /* hover: only show shine animation (no movement or size change) */
   button:hover,
   input[type="button"]:hover,
   input[type="submit"]:hover,
   a.button:hover,
   a[role="button"]:hover,
+  .donate-btn:hover,
   .donate-btn a:hover,
+  .cart-donate-btn:hover,
+  .cart-donate-btn a:hover,
   .donate-btn-e:hover,
+  .btn_share:hover,
   .card-form button:hover,
   .spinner-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+    /* intentionally empty to avoid visual movement */
   }
 
   /* animate the shine on hover */
@@ -857,11 +870,15 @@
   input[type="button"]:hover::before,
   input[type="submit"]:hover::before,
   a.button:hover::before,
+  .donate-btn:hover::before,
   .donate-btn a:hover::before,
+  .cart-donate-btn:hover::before,
+  .cart-donate-btn a:hover::before,
   .donate-btn-e:hover::before,
+  .btn_share:hover::before,
   .card-form button:hover::before,
   .spinner-btn:hover::before {
-    animation: swish 1.2s ease-out forwards;
+    animation: swish 1.2s ease-out infinite;
   }
 
   @keyframes swish {
@@ -871,16 +888,15 @@
   }
 
   /* optional icon translation inside buttons (if you use .icon elements) */
+  /* keep icons static on hover to avoid movement */
   button .icon,
   .donate-btn a .icon,
+  .donate-btn .icon,
+  .cart-donate-btn .icon,
+  .donate-btn-e .icon,
+  .btn_share .icon,
   .card-form button .icon {
-    transition: transform .3s ease-in-out;
-  }
-
-  button:hover .icon,
-  .donate-btn a:hover .icon,
-  .card-form button:hover .icon {
-    transform: translateX(6px);
+    transition: none;
   }
 
   /* opt-out class: prevents shine and lift */
@@ -889,6 +905,23 @@
     transform: none !important;
     animation: none !important;
     display: block !important;
+  }
+
+  /* Ensure donate/share buttons keep constant box sizing and vertical rhythm
+     so the shine overlay doesn't change their height on hover. */
+  .donate-btn a,
+  .cart-donate-btn a,
+  .donate-btn-e,
+  .btn_share,
+  .btns-share .btn_share {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    margin-top: 0 !important;
+    height: auto;
+    line-height: normal;
   }
 
   .project-container-2 .p-progress-text p.amount {
@@ -1549,5 +1582,5 @@
     width: 100%;
   }
 
-  .g-card-footer;
+  /* .g-card-footer; */
 </style>
