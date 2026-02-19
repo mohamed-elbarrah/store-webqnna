@@ -968,6 +968,12 @@
     }
   }
 
+  .d-card-image img {
+    width: 100%;
+    height: 350px;
+    object-fit:fill;
+  }
+
   /**************************************************************************/
   /* Edit donate share buttons (Kafala) */
 
@@ -1013,14 +1019,13 @@
   .d-card-footer {
     padding: 15px;
     background: #f3f3f3;
-    height: 65px;
     position: absolute;
     left: 0;
     bottom: 0;
     width: 100%;
   }
   .d-footer-btns {
-    display: flex;
+   
     width: 100%;
     justify-content: stretch;
     align-items: center;
@@ -1030,6 +1035,7 @@
     flex: 1;
     height: 34px;
     margin: 0 3px;
+    align-items: center;
   }
   .d-footer-btns > div input,
   .d-footer-btns > div a {

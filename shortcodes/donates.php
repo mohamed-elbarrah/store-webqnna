@@ -104,7 +104,7 @@
                 .btns-share{
                     display: grid;
                     grid-template-columns: repeat(2, 1fr);
-                    gap: 8px;
+                    gap: 0px;
                     margin-top: 14px;
                     align-items: center;
                     padding: 6px 0;
@@ -124,6 +124,43 @@
                 }
                     /* If a label is long, make it occupy the full row (span both columns) */
                     .btns-share .btn_share--full{ grid-column: 1 / -1; }
+
+                /* Redesigned footer: amount box, quantity selector and action buttons */
+                .donates-container .qscard .d-card-footer .d-footer-btns{ display: flex !important; flex-direction:column;}
+                .donates-container .qscard .d-footer-btns .d-footer-row.top{ display: flex !important; gap:8px; align-items:center;  }
+
+                .donation-box{ flex:1; background:#F5F5F5; border-radius:16px; padding:14px 16px; display:flex; flex-direction:column; justify-content:center; text-align:right; min-height:72px; border:1.5px dashed #e6eef3; }
+                .donation-label{ font-size:13px; color:#9aa6ab; margin-bottom:6px; }
+                .amount{ position:relative; display:flex; align-items:center; justify-content:flex-end; }
+                .amount .amount-input{ font-size:24px; font-weight:700; border:0; background:transparent; text-align:right; padding:0; width:100%; color:#0f1720; }
+                .amount .currency{ position:absolute; right:14px; color:#0f1720; font-weight:700; font-size:16px; }
+
+                .qty-box{  background:#ffffff; border-radius:16px; display:flex; align-items:center; justify-content:center; gap:8px; padding:4px; box-shadow: 0 1px 4px rgba(0,0,0,0.03);  border:1px solid #f3f3f3; }
+                .qty-box .spinner-btn{ background:transparent; border:0; font-size:22px; font-weight:700; padding:4px 8px; cursor:pointer; }
+                .qty-box .spinner-btn[data-dir="up"]{ color:#1E6B3A; }
+                .qty-box .spinner-btn[data-dir="down"]{ color:#222; }
+                .qty-box .qty-input{ width:44px; text-align:center; border:0; background:transparent; font-weight:700; font-size:18px; }
+
+                .donates-container .qscard .d-footer-row.buttons{ width: 100%; display:flex !important; gap:8px; }
+                .donates-container .qscard .d-footer-row.buttons .donate-btn, .donates-container .qscard .d-footer-row.buttons .cart-donate-btn{ flex:1; }
+                .donates-container .qscard .d-footer-row.buttons .donate-btn a, .donates-container .qscard .d-footer-row.buttons .cart-donate-btn a{ display:block; text-decoration:none; color:#fff; border-radius:16px; text-align:center; font-size:14px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+                .donates-container .qscard .d-footer-row.buttons .donate-btn a{ background:#1E6B3A; }
+                .donates-container .qscard .d-footer-row.buttons .cart-donate-btn a{ background:#C15A00; }
+                .donate-btn .btn-arrow{ margin-left:8px; }
+
+                /* enforce order so green donate appears on the left visually */
+                .donates-container .qscard .d-footer-row.buttons .donate-btn{ order:1 }
+                .donates-container .qscard .d-footer-row.buttons .cart-donate-btn{ order:2 }
+
+                /* ensure Arabic text inside buttons remains RTL */
+                .donates-container .qscard .d-footer-row.buttons a{ direction: rtl; }
+
+                @media (max-width:600px){
+                    .donates-container .qscard .d-footer-row.top{ flex-direction:column-reverse; gap:12px; }
+                    .qty-box{ width:100%; }
+                    .d-footer-row.buttons{ flex-direction:column; }
+                    .d-footer-row.buttons .donate-btn a, .d-footer-row.buttons .cart-donate-btn a{ height:50px; line-height:50px; }
+                }
             </style>
                 <script>
                     document.addEventListener('DOMContentLoaded', function(){
@@ -221,9 +258,26 @@
                         </div>
                         <div class="d-card-footer">
                             <div class="d-footer-btns">
-                                <div class="amount"><input type="numeric" class="<?=($has_custom_donate)?'disable-input':''?>" name="amount" maxlength="6" placeholder="الملبغ" min="1" max="250000" value=""></div>
-                                <div class="cart-donate-btn"><a href="javascript:void(0)">إضافة</a></div>
-                                <div class="donate-btn"><a href="javascript:void(0)">تبرع الآن</a></div>
+                                <div class="d-footer-row top">
+                                    <div class="donation-box">
+                                        <label class="donation-label">قيمة التبرع</label>
+                                        <div class="amount">
+                                            <input type="numeric" class="<?=($has_custom_donate)?'disable-input':''?> amount-input" name="amount" maxlength="6" placeholder="الملبغ" min="1" max="250000" value="">
+                                            <span class="currency">ر.س</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="qty-box" aria-label="quantity selector">
+                                        <button class="spinner-btn" data-dir="up" type="button">+</button>
+                                        <input type="numeric" name="shares" maxlength="3" value="1" class="qty-input">
+                                        <button class="spinner-btn" data-dir="down" type="button">-</button>
+                                    </div>
+                                </div>
+
+                                <div class="d-footer-row buttons">
+                                    <div class="donate-btn"><a href="javascript:void(0)"><span class="btn-text">تبرع الآن</span></a></div>
+                                    <div class="cart-donate-btn"><a href="javascript:void(0)"><span class="btn-text">إضافة</span> <i class="fas fa-shopping-cart"></i></a></div>
+                                </div>
                             </div>
                         </div>
                     </div>
