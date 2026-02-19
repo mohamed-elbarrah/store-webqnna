@@ -1,0 +1,103 @@
+<div class="container-covor" style="display: none;">
+    <div class="fountainG-container">
+        <div style="display: none;" class="srv-notic">
+            <div class="srv-notic-inner">
+                <div class="srv-notic-text" style="margin: 25px 20px 35px 20px;"></div>
+                <div style="direction: rtl;">
+                    <div class="srv-notic-ok">موافق</div>
+                    <div class="srv-notic-cancel" style="display: none;">الغاء</div>
+                </div>
+            </div>
+        </div>
+        <div class="fountainG-center">
+            <div id="fountainG">
+                <div id="fountainG_1" class="fountainG"></div>
+                <div id="fountainG_2" class="fountainG"></div>
+                <div id="fountainG_3" class="fountainG"></div>
+                <div id="fountainG_4" class="fountainG"></div>
+                <div id="fountainG_5" class="fountainG"></div>
+                <div id="fountainG_6" class="fountainG"></div>
+                <div id="fountainG_7" class="fountainG"></div>
+                <div id="fountainG_8" class="fountainG"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var srvfunc = false;
+    var srvfunc2 = false;
+    var $ = jQuery;
+    
+    jQuery(document).ready(function($) {
+        
+        $('.srv-notic-ok').click(function() {
+            $('.container-covor').fadeOut(function() {
+                $(".srv-notic").hide();
+                if (srvfunc) srvfunc();
+            });
+        });
+        $('.srv-notic-cancel').click(function() {
+            $('.container-covor').fadeOut(function() {
+                $(".srv-notic").hide();
+                if (srvfunc2) srvfunc2();
+            });
+        });
+    });
+
+    function srvnotic(s, func = false, func2 = false, btn = false, btn2 = false) {
+        srvloader();
+
+        if (func2) {
+            $('.srv-notic-cancel').show();
+        } else {
+            $('.srv-notic-cancel').hide();
+        }
+
+        if (!btn) btn = 'موافق';
+        if (!btn2) btn2 = 'إلغاء';
+
+        $('.srv-notic-ok').html(btn);
+        $('.srv-notic-cancel').html(btn2);
+
+        jQuery('#fountainG').hide();
+        jQuery('.srv-notic-text').html(s);
+        jQuery('.srv-notic').fadeIn();
+
+        if (func) srvfunc = func;
+        else srvfunc = false;
+        if (func2) srvfunc2 = func2;
+        else srvfunc2 = false;
+    }
+
+    function srvloader(hide) {
+        if (hide) {
+            jQuery('#fountainG').hide();
+            jQuery('.container-covor').fadeOut();
+        } else {
+            jQuery('#fountainG').show();
+            jQuery('.container-covor').fadeIn();
+        }
+    }
+    
+    
+    /* new type of notifications */
+
+    function notic(str, type = "") {
+        $(document).find(".notification").remove();
+        var notification = $(
+            '<div class="notification"><div class="content">' + str + "</div></div>"
+        );
+        if (type) notification.addClass(type);
+        $("body").append(notification);
+        notification.show();
+        notification.addClass("show_up");
+        setTimeout(function () {
+            notification.removeClass("show_up");
+            setTimeout(function () {
+                notification.remove();
+            }, 500);
+        }, 4000);
+    }
+</script>

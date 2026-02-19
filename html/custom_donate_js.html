@@ -1,0 +1,173 @@
+<style>
+    .custom_donate_items {
+        padding: 10px 0;
+        margin-top: 10px;
+        border-top: solid 1px #00800029;
+    }
+    .custom_donate_el {
+        display: flex;
+        position: relative;
+        justify-content: space-between;
+        padding: 5px 0 5px 35px;
+        border-bottom: dashed 1px #00000017;
+    }
+    
+    .custom_donate_el:hover span.editbtn{
+        display: block;
+    }
+    .custom_donate_el span.editbtn{
+        position: absolute;
+        display: none;
+        background-color: white;
+        padding: 0 3px;
+        text-align: center;
+        border: solid 1px;
+        border-radius: 5px;
+        left: 0;
+        cursor: pointer;
+    }
+    .custom_donate_el span.editbtn:hover{
+        background-color: green;
+        color: white;
+    }
+    .custom_donate_edit_container{
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        right: 0;
+        background-color: rgb(0 0 0 / 52%);
+        z-index: 999999;
+        padding: 5px;
+        box-sizing: border-box;
+    }
+    .cde_inner{
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 0 0 20px black;
+        width: 100%;
+        max-width: 400px;
+        margin: auto;
+        margin-top: 60px;
+        display: flex;
+        justify-content: center;
+        padding: 40px 0;
+        box-sizing: border-box;
+    }
+    .cde_inner a.cbtn {
+        display: inline-block;
+        text-decoration: none;
+        color: #6b4d94;
+        background-color: white;
+        border: solid 1px;
+        border-radius: 5px;
+        margin: 20px 5px 0 5px;
+        padding: 2px 26px;
+        cursor: pointer;
+        transition: ease-in-out 0.2s;
+    }
+    .cde_inner a.cbtn:hover{
+        box-shadow: 0 0 5px;
+    }
+    .cde_inner input {
+        width: 100%;
+    }
+    .custom_donate_addbtn a {
+        text-decoration: none;
+        border: solid 1px;
+        padding: 2px 5px;
+        margin: 10px 10px 0 10px;
+        display: inline-block;
+        border-radius: 4px;
+        color: green;
+        transition: ease-in-out 0.3s;
+    }
+    .custom_donate_addbtn a:hover{
+        color: white;
+        background-color: green;
+    }
+</style>
+<div class="custom_donate_edit_container" style="display: none;">
+    <div class="cde_inner">
+        <input class="cde_input_id" type="hidden" value="">
+        <table>
+            <tr>
+                <th>[name]</th>
+                <td><input class="cde_input_name" type="text" value=""></td>
+            </tr>
+            <tr>
+                <th>[price]</th>
+                <td><input class="cde_input_price" type="number" min="0" value=""></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><a class="cbtn cbtn_save" href="javascript:void(0)">[save]</a><a class="cbtn cbtn_delete" href="javascript:void(0)">[delete]</a><a class="cbtn" href="javascript:void(0)" >[cancel]</a></td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+<script>
+    jQuery(document).ready(function($){
+        display_custom_donate();
+        function display_custom_donate(){
+            $('.custom_donate_items').html('');
+            $.each(custom_donate, function (key, val) {
+                var name = val[0];
+                var share = val[1];
+                $('.custom_donate_items').append('<div class="custom_donate_el" data-id="' + key + '"><span class="editbtn">edit</span><span class="name">' + name + '</span><span class="share">' + share + '</span></div>');
+            });
+            $('.custom_donate_input').val(JSON.stringify(custom_donate));
+        }
+        $('.p_toggle').each(function(){
+            if(this.checked) {
+                $($(this).data('selector')).show();
+            }else{
+                $($(this).data('selector')).hide();
+            }
+        });
+        $('.p_toggle').change(function() {
+            if(this.checked) {
+                $($(this).data('selector')).slideDown();
+            }else{
+                $($(this).data('selector')).slideUp();
+            }
+        });
+        $(document).on('click', '.custom_donate_el', function(){
+            var id = $(this).data('id');
+            $('.cde_input_id').val(id);
+            $('.cde_input_name').val(custom_donate[id][0]);
+            $('.cde_input_price').val(custom_donate[id][1]);
+            $('.custom_donate_edit_container').show();
+        });
+        $('.cbtn').click(function(){
+            $('.custom_donate_edit_container').hide();
+        });
+        $('.custom_donate_addbtn a').click(function(){
+            $('.cde_input_id').val('new');
+            $('.cde_input_name').val('');
+            $('.cde_input_price').val('');
+            $('.custom_donate_edit_container').show();
+        });
+        $('.cbtn_save').click(function(){
+            var id = $('.cde_input_id').val();
+            if(!$('.cde_input_price').val())$('.cde_input_price').val(1);
+            if(id == 'new'){
+                custom_donate.push([$('.cde_input_name').val(), $('.cde_input_price').val()]);
+            }else{
+                custom_donate[id][0] = $('.cde_input_name').val();
+                custom_donate[id][1] = $('.cde_input_price').val();
+            }
+            display_custom_donate();
+        });
+        $('.cbtn_delete').click(function(){
+            var id = $('.cde_input_id').val();
+            if(id == 'new'){
+                
+            }else{
+                custom_donate.splice(id, 1);
+            }
+            display_custom_donate();
+        });
+    });
+</script>

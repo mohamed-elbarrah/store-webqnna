@@ -1,0 +1,30 @@
+<div class="post-card" data-id="[post_id]" data-share_value="[share_value]">
+    <a href="[link]">
+        <div class="card-image"><img src="[thumbnail_url]">
+            <div class="share-view">قيمة السهم<br>
+                <span style="font-size: 20px;">[share_value]</span>
+                <br>
+                ريال
+            </div>
+        </div>
+    </a>
+    <div class="card-content">
+        <a href="[link]"><div class="card-title"><h2>[title]</h2></div></a>
+        <div class="input_spinner" data-share="[share_value]">
+            <button class="spinner-btn btn btn-primary btn-sm" data-dir="down">-</button>
+            <input type="number" name="shares" maxlength="3" value="1" placeholder="عدد الأسهم" min="1" max="200">
+            <button class="spinner-btn btn btn-primary btn-sm" data-dir="up">+</button>
+        </div>
+        <div class="progress_bar">
+            <div class="projcet-progress" [delete]style="width: [precentage]%"></div>
+            <span>[net_revenue]</span> ريال من <span>[project_goal]</span>
+        </div>
+        <div class="amount">
+            <i>ر.س.</i>
+            <input type="number" name="amount" maxlength="6" placeholder="مبلغ التبرع" min="1" max="250000" value="[share_value]">
+        </div>
+        <div class="donate-btn">
+            <a href="javascript:void(0)">تبرع الآن</a>
+        </div>
+    </div>
+</div>

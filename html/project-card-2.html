@@ -1,0 +1,60 @@
+<div class="p-card post-card" data-id="[product_id]" data-share_value="[share_value]">
+    <div class="p-image">
+        <div class="projectCardShare">
+            <span style="background: [project_color];"><i class="fas fa-share-alt"></i></span>
+            <a href="https://twitter.com/intent/tweet?text=[social_share_text]&url=[social_share_link]" class="tws" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.facebook.com/sharer.php?t=[social_share_text]&u=[social_share_link]" class="fbs" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/?url=[social_share_link]" class="gps" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://web.whatsapp.com/send?text=[social_share_text] [social_share_link]" class="was" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <a href="[link]"><img src="[thumbnail_url]">
+            <div class="xs-item-header-content">
+                <div class="xs-skill-bar-v3" data-percent="[precentage]%">
+                    <div class="xs-skill-track" [delete]style="width: [precentage]%; background-color: [project_color]">
+                        <p [delete]style="background-color: [project_color]">[precentage]%</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="p-content">
+        <div class="p-category">
+            [category]
+        </div>
+        <div class="p-title">
+            <a href="[link]">
+                <h2>[title]</h2>
+            </a>
+        </div>
+        <div class="p-progress-text">
+            <div class="p-project_goal">
+                <p class="amount">[project_goal] ر.س</p>
+                <span>الهدف</span>
+            </div>
+            <div class="p-net_revenue">
+                <p class="amount">[net_revenue] ر.س</p>
+                <span>الإستلام</span>
+            </div>
+            <div class="p-donate-2" [delete]style="border-bottom-color: [project_color]">
+                <a class="p-donate-switch" href="javascript:void(0)" [delete]style="background-color: [project_color]">تبرع</a>
+                <div class="p-donate-content card-content" [delete]style="border-top-color: [project_color]">
+                    <div class="p-donate-content-inner">
+                        <div class="input_spinner" data-share="[share_value]">
+                            <button class="spinner-btn btn btn-primary btn-sm" data-dir="down">-</button>
+                            <input type="number" name="shares" maxlength="3" value="1" placeholder="عدد الأسهم" min="1" max="200">
+                            <button class="spinner-btn btn btn-primary btn-sm" data-dir="up">+</button>
+                        </div>
+                        <div class="amount">
+                            <span>مبلغ التبرع</span>
+                            <i>ر.س.</i>
+                            <input type="number" name="amount" maxlength="6" placeholder="مبلغ التبرع" min="1" max="250000" value="[share_value]">
+                        </div>
+                        <div class="donate-btn">
+                            <a href="javascript:void(0)">تبرع الآن</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

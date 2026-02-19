@@ -1,0 +1,210 @@
+<style>
+    .spt-container {
+        margin: 0 20px;
+        padding: 50px 10px;
+        box-sizing: border-box;
+    }
+
+    .spt-container * {
+        box-sizing: border-box;
+    }
+
+    .spt-post {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .spt-image {
+        width: 33.3333%;
+    }
+
+    .spt-content {
+        flex: 1;
+        padding: 5px 20px;
+    }
+
+    .spt-thumbnail {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .spt-thumbnail img {
+        transition: all .2s ease-in-out;
+        border: solid 1px #0000001f;
+    }
+
+    .img-responsive {
+        margin: 0 auto;
+    }
+
+    .boxshare {
+        margin-top: 40px;
+  background-color: #fff;
+  border: 1px solid #dddcd5;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 3px 12px rgb(0 0 0 / 10%);
+  border-radius: 20px
+    }
+
+    .boxshare .btns-share {
+        padding: 15px;
+    }
+
+    @media screen and (max-width: 800px) {
+        .spt-image {
+            width: 100%;
+        }
+
+        .spt-content {
+            padding: 5px;
+        }
+
+        .boxshare {
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+
+    }
+
+    
+</style>
+
+<div class="spt-container">
+    <h2 class="section-title">[title]</h2>
+    <div class="spt-post">
+        <div class="spt-image">
+            <div class="spt-thumbnail">
+                <img src="[thumbnail-url]" class="img-responsive" alt="[title] ">
+            </div>
+        </div>
+        <div class="spt-content">
+            <div class="card-content d-card qscard" data-id="[id]">
+                
+                <div style="text-align: justify; direction: rtl;">
+                    [content]
+                 </div>
+                 <div style="text-align: justify; direction: rtl;">
+                    [excerpt]
+                 </div>
+                <div class="boxshare">
+                    <div>
+                        [btns-share]
+                    </div>
+                    <div class="input_spinner" data-share="[share]" [delete]style="[spinner-style]">
+                        <button class="spinner-btn btn btn-primary btn-sm" data-dir="down">-</button>
+                        <input type="number" name="shares" maxlength="3" value="1" placeholder="عدد الأسهم" min="1"
+                            max="200">
+                        <button class="spinner-btn btn btn-primary btn-sm" data-dir="up">+</button>
+                    </div>
+                    <style>
+                        .donation-container {
+                            text-align: center;
+                        }
+                    
+                        .progress-bar {
+                            width: 80%;
+                            margin: 20px auto;
+                            border: 1px solid #ccc;
+                            border-radius: 5px;
+                            overflow: hidden;
+                        }
+                    
+                        .progress {
+                            width: 50%; /* Set this dynamically with JavaScript */
+                            background-color: #4CAF50;
+                            color: white;
+                            text-align: center;
+                            padding: 10px 0;
+                        }
+                    
+                        .amount, .percentage {
+                            display: block;
+                            margin-top: 10px;
+                        }
+
+                        
+                        .sqd-progress-container {
+                            margin: 20px 10px;
+                        }
+                        
+                        .sqd-progress-container.goal-0{
+                            display: none;
+                        }
+
+                        .sqd-progress-labels{
+                            display: flex;
+                            justify-content: space-between;
+                            padding: 0 10px;
+                        }
+
+                        .sqd-progress {
+                            width: 100%;
+                            height: 17px;
+                            border-radius: 10px;
+                            border: 1px solid rgb(13 76 31 / 28%);
+                            overflow: hidden;
+                            position: relative;
+                            box-shadow: inset #808080cf 0px 0px 17px -12px;
+                            box-sizing: border-box;
+                        }
+                        
+                        .sqd-progress span {
+                            font-size: 12px;
+                            height: 100%;
+                            display: block;
+                            width: 0;
+                            min-width: 30px;
+                            padding-inline-end: 12px;
+                            padding-inline-start: 5px;
+                            color: rgb(255, 251, 251);
+                            line-height: 14px;
+                            position: absolute;
+                            text-align: end;
+                            box-sizing: border-box;
+                            background-image: -webkit-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+                            background-size: 75px 75px;
+                            box-shadow: 0 0 5px #00000033;
+                            border-radius: 10px 0 0 10px;
+                        }
+
+                        .progress-green span {
+                            background-color: #2a8165;
+                        }
+                    </style>
+                    
+                    <div class="donation-container">
+                        <div class="sqd-progress-container goal-[project_goal]">
+                            <div class="sqd-progress-labels">
+                                <span>[received_donations] ريال</span>
+                                <span>[project_goal] ريال</span>
+                            </div>
+                            <div class="sqd-progress sqd-progress-animated- progress-green">
+                                <span data-progress="[percentage]" style="width: [percentage_width]; background-color: #2a8165;">[percentage]%</span>
+                            </div>
+                        </div>
+                    </div>                    
+                    <div class="d-card-footer" style="position: relative;">
+                        <div class="d-footer-btns">
+                            <div class="amount"><input type="number" class="[disable-input]" name="amount" maxlength="6"
+                                    placeholder="الملبغ" min="1" max="250000" value=""></div>
+                            <div class="cart-donate-btn"><a href="javascript:void(0)">إضافة</a></div>
+                            <div class="donate-btn"><a href="javascript:void(0)">تبرع الآن</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin: 30px 0;" class="zad-box">
+                    <h3 style="text-align: right;margin: 10px 10px;">شارك على :</h3>
+                    <div class="zad-box-first" style="opacity: 1; top: 0px;"> <a id="fbshare" data-share="https://www.facebook.com/sharer/sharer.php?u=[share-url]&title=[share-title]" rel="nofollow" href="javascript:void(0);" class="share-icon fab fa-facebook"></a> <a id="twshare" data-share="https://twitter.com/share?text=[share-title]&url=[share-url]" rel="nofollow" href="javascript:void(0);" class="share-icon fab fa-twitter"></a> <a id="lishare" data-share="https://www.linkedin.com/shareArticle?mini=true&url=[share-url]&title=[share-title]&source=https://www.zaadbooks.com" rel="nofollow" href="javascript:void(0);" class="share-icon fab fa-linkedin"></a> <a id="telshare" data-share="https://telegram.me/share/url?url=[share-url]&text=[share-title]" rel="nofollow" href="javascript:void(0);" class="share-icon fab fa-telegram-plane"></a> <a id="washare" data-share="whatsapp://send?text=[share-title]-[share-url]" rel="nofollow" href="javascript:void(0);" class="share-icon fab fa-whatsapp"></a> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="text-align: center;"><h2>تبرعات مشابهة</h2></div>
+
+<div style="max-width: 1200px; margin: auto; padding: 30px;">
+    [related]
+</div>

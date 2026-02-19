@@ -1,0 +1,145 @@
+<style>
+    .spt-container {
+        margin: 0 20px;
+        padding: 50px 10px;
+        box-sizing: border-box;
+    }
+
+    .spt-container * {
+        box-sizing: border-box;
+    }
+
+    .spt-post {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .spt-image {
+        width: 33.3333%;
+    }
+
+    .spt-content {
+        flex: 1;
+        padding: 5px 20px;
+    }
+
+    .spt-thumbnail {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .spt-thumbnail img {
+        transition: all .2s ease-in-out;
+        border: solid 1px #0000001f;
+    }
+
+    .img-responsive {
+        margin: 0 auto;
+    }
+
+    .boxshare {
+        margin-top: 40px;
+  background-color: #fff;
+  border: 1px solid #dddcd5;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 3px 12px rgb(0 0 0 / 10%);
+  border-radius: 20px
+    }
+
+    .boxshare .btns-share {
+        padding: 15px;
+    }
+
+    a.tuning-button {
+        display: inline-block;
+        padding: 10px;
+        background-color: #41741b;
+        color: white;
+        border-radius: 0;
+        width: 100%;
+    }
+
+    @media screen and (max-width: 800px) {
+        .spt-image {
+            width: 100%;
+        }
+
+        .spt-content {
+            padding: 5px;
+        }
+
+        .boxshare {
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+
+    }
+</style>
+
+<div class="spt-container">
+    <h2 class="section-title">[title]</h2>
+    <div class="spt-post">
+        <div class="spt-image">
+            <div class="spt-thumbnail">
+                <img src="[thumbnail-url]" class="img-responsive" alt="[title] ">
+                <div>[tuning-button]</div>
+            </div>
+            
+        </div>
+        <div class="spt-content">
+            <div class="card-content g-container" data-id="[id]">
+                <div style="text-align: justify; direction: rtl;">
+                    [content]
+                </div>
+                <div style="text-align: justify; direction: rtl;">
+                    [excerpt]
+                </div>
+
+                
+                <div class="boxshare">
+                    <div>
+                        [btns-share]
+                    </div>
+                    <div class="input_spinner" data-share="[share]" [delete]style="[spinner-style]">
+                        <button class="spinner-btn btn btn-primary btn-sm" data-dir="down">-</button>
+                        <input type="number" name="shares" maxlength="3" value="1" placeholder="عدد الأسهم" min="1"
+                            max="200">
+                        <button class="spinner-btn btn btn-primary btn-sm" data-dir="up">+</button>
+                    </div>
+                    <div class="d-card-footer" style="position: relative;">
+                        <div class="d-footer-btns">
+                            <div class="amount"><input type="number" class="disable-input" name="amount" maxlength="6"
+                                    placeholder="الملبغ" min="1" max="250000" value="[share]"></div>
+                            <div class="donate-btn"><a href="javascript:void(0)">إهداء الآن</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin: 30px 0;" class="zad-box">
+                    <h3 style="text-align: right;margin: 10px 10px;">شارك على :</h3>
+                    <div class="zad-box-first" style="opacity: 1; top: 0px;"> <a id="fbshare"
+                            data-share="https://www.facebook.com/sharer/sharer.php?u=[share-url]&title=[share-title]"
+                            rel="nofollow" href="javascript:void(0);" class="share-icon fab fa-facebook"></a> <a
+                            id="twshare" data-share="https://twitter.com/share?text=[share-title]&url=[share-url]"
+                            rel="nofollow" href="javascript:void(0);" class="share-icon fab fa-twitter"></a> <a
+                            id="lishare"
+                            data-share="https://www.linkedin.com/shareArticle?mini=true&url=[share-url]&title=[share-title]&source=https://www.zaadbooks.com"
+                            rel="nofollow" href="javascript:void(0);" class="share-icon fab fa-linkedin"></a> <a
+                            id="telshare" data-share="https://telegram.me/share/url?url=[share-url]&text=[share-title]"
+                            rel="nofollow" href="javascript:void(0);" class="share-icon fab fa-telegram-plane"></a> <a
+                            id="washare" data-share="whatsapp://send?text=[share-title]-[share-url]" rel="nofollow"
+                            href="javascript:void(0);" class="share-icon fab fa-whatsapp"></a> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="text-align: center;">
+    <h2>هدايا مشابهة</h2>
+</div>
+
+<div style="max-width: 1200px; margin: auto; padding: 30px;">
+    [related]
+</div>

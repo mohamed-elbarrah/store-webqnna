@@ -1,0 +1,322 @@
+<style>
+    .za * {
+        box-sizing: border-box;
+        font-family: 'El Messiri' !important;
+        
+    }
+
+    .za-2 * {
+        box-sizing: border-box;
+        font-family: 'El Messiri' !important;
+        font-size: 16px;
+        text-align: justify;
+        padding: 20px 0 33px 0;
+        color: #fff;
+        background-color: #15572e;
+        padding: 10px;
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        -ms-border-radius: 6px;
+        -o-border-radius: 6px;
+        border-radius: 0 0 10px 12px;
+        
+    }
+    
+    .za .disc {
+        font-size: 16px;
+        text-align: justify;
+        padding: 20px 0 33px 0;
+    }
+
+    .za-content {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .za-right {
+        flex: 1;
+    }
+
+    .za-left {
+        width: 300px;
+    }
+
+    .input-group {
+        padding: 10px;
+        margin: 6px;
+    }
+
+    .g-content {
+        background-color: #f3f3f3;
+        padding: 25px 10px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        width: calc(100% - 40px);
+        border: solid 2px #15572e !important;
+    }
+
+    .g-title {
+        padding: 0 0 0 40px;
+    }
+
+    .g-title span {
+        padding: 10px;
+        display: inline-block;
+        background-color: #15572e;
+        color: white;
+        margin: 0 0 -1px 0;
+        border: solid 1px #224a04;
+        border-bottom: solid 1px #224a046;
+        border-radius: 5px 5px 0 0;
+        width: 100%;
+        text-align: center;
+        
+    }
+
+    .g-content input {
+        padding: 10px;
+        width: 47%;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+        box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+        -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    }
+
+    .g-content input:focus {
+        border-color: #66afe9;
+        outline: 0;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+    }
+
+    .za .za-left .sbb-top {
+        border-top: solid 2px #15572e;
+        border-bottom: solid 2px #15572e;
+        margin: 5%;
+        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .19);
+        -webkit-border-radius: 12px;
+        -moz-border-radius: 12px;
+        -ms-border-radius: 12px;
+        -o-border-radius: 12px;
+        border-radius: 12px;
+    }
+
+    .za .za-left .sbb-top-title {
+        color: #fff;
+        background-color: #15572e;
+        width: 80%;
+        margin: 0 10% 20px;
+        padding: 10px;
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        -ms-border-radius: 6px;
+        -o-border-radius: 6px;
+        border-radius: 0 0 10px 12px;
+    }
+
+        .sbb-top-title-3 {
+        color: #fff;
+        background-color: #15572e;
+        width: 80%;
+        margin: 0 10% 20px;
+        padding: 10px;
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        -ms-border-radius: 6px;
+        -o-border-radius: 6px;
+        border-radius: 0 0 10px 12px;
+        border-bottom: 4px solid #c39e47 !important;
+    }
+
+     .sbb-top-3 {
+        border-top: solid 6px #15572e;
+        border-bottom: solid 6px #15572e;
+        margin: 5%;
+        box-shadow: 0 1px 1px 0 rgb(117, 39, 33), 0 1px 5px 0 rgb(117, 39, 33);
+        -webkit-border-radius: 12px;
+        -moz-border-radius: 12px;
+        -ms-border-radius: 12px;
+        -o-border-radius: 12px;
+        border-radius: 12px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    
+    .za33 {
+	color: #15572e;
+	font-weight: bold;
+    }
+
+
+    .za-add {
+	color: black !important;
+	font-weight: bold;
+    }
+
+
+    .za .za-left .sbb-top-title p {
+        margin: 0;
+        padding: 0;
+        line-height: 20px;
+    }
+
+    .div-total {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+    }
+
+    .div-total-box {
+        width: 100%;
+        padding: 20px 0;
+    }
+
+    .span-total {
+        font-size: 50px;
+        line-height: 50px;
+        color: black;
+        width: 100px;
+    }
+
+    .span-currency {
+        font-size: 18px;
+        line-height: 20px;
+        display: block;
+        margin: 10px 0;
+        color: #909090;
+    }
+
+    @media screen and (max-width: 800px) {
+        .za-left {
+            width: 100%;
+        }
+
+        .input-group {
+            padding: 10px 0;
+            margin: 6px 0;
+        }
+
+        .g-title {
+            padding: 0;
+        }
+
+        .g-content input {
+            width: 100%;
+            margin: 5px 0;
+            padding: 10px 5px;
+            font-size: 13px;
+        }
+
+        .g-content {
+            margin: 0;
+            padding: 25px 5px;
+            width: 100%;
+        }
+    }
+</style>
+
+
+<div class="za za33">
+    <div class="disc">
+                <div class="sbb-top-3">
+                <div class="sbb-top-title-3">
+                    <p style="text-align:center">أحسب زكاتك:</p>
+                </div>
+
+        <p>حاسبة الزكاة على موقعنا، تمكنك من حساب قيمة الزكاة الخاصة بك بعد كتابة المال أو المبلغ الذي تملكه بعد تحقق
+            نصاب الزكاة، وكما يمكنك أيضاً من حساب قيمة زكاة الذهب من خلال إدخال مقدار الذهب وبالتالي تتعرف على قيمة
+            الزكاة الواجبة عليها. ويمكنك حساب الزكاة للممتلكات الخاصة بك أو الأسهم أو السندات بكتابة قيمة السهم أو
+            السند، وبعد ذلك يظهر لك قيمة الزكاة الخاصة بها.</p>
+    </div>
+
+    <div class="za-content">
+        <div class="za-right">
+
+            <div class="input-group">
+                <div class="g-title">
+                    <span>1- زكاة مال</span>
+                </div>
+                <div class="g-content">
+                    <input type="number" class="za-add" style="width: 96%" placeholder="ما هي قيمة المال الذي تمتلكه؟">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="g-title">
+                    <span>2- زكاة الأصول والممتلكات</span>
+                </div>
+                <div class="g-content">
+                    <input type="number" class="za-add" placeholder="ما هي قمية الأسهم التي تمتلكها في السوق؟">
+                    <input type="number" class="za-add" placeholder="ما هي قيمة الأرباح التي تم الحصول عليها؟">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="g-title">
+                    <span>3- زكاة الذهب</span>
+                </div>
+                <div class="g-content">
+                    <input type="number" id="gold-price" placeholder="أدخل قيمة جرام الذهب">
+                    <input type="number" id="gold-total" placeholder="ما هو وزن الذهب الذي تمتلكه؟">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="g-title">
+                    <span>4- زكاة العقارات المملوكة</span>
+                </div>
+                <div class="g-content">
+                    <input type="number" class="za-add" placeholder="ما هي قيمة إيجار العقار السنوي الذي تمتلكه؟">
+                    <input type="number" class="za-add" placeholder="إجمالي القيمة السوقية للعقارات المتاحة للبيع خلال سنة واحدة">
+                </div>
+            </div>
+
+        </div>
+        <div class="za-left">
+            <div class="sbb-top">
+                <div class="sbb-top-title">
+                    <p style="text-align:center">الزكاة الإجمالية المستحقة هي:</p>
+                </div>
+
+                <div class="div-total">
+                    <div class="div-total-box">
+                        <span id="total" class="span-total">0.0</span>
+                        <span class="span-currency">ريال</span>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    jQuery(document).ready(function($){
+        $('.za input').keyup(function(){
+            calculate_total();
+        });
+        function calculate_total(){
+            let total = 0;
+            $('.za-add').each(function(){
+                if($.isNumeric($(this).val()) && $(this).val()){
+                    total += parseFloat($(this).val());
+                }
+            });
+            if($.isNumeric($('#gold-total').val()) && $('#gold-total').val() && $.isNumeric($('#gold-price').val()) && $('#gold-price').val()){
+                total += parseFloat($('#gold-total').val()) * parseFloat($('#gold-price').val());
+            }
+            $('#total').html((total * (1/ 10) * (1/4)).toFixed(1));
+        }
+    });
+</script>
+
+
+
+

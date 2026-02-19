@@ -1,0 +1,422 @@
+<style>
+    .tuning-gift {
+        direction: rtl;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        border: solid 1px #0000000a;
+        border-radius: 10px;
+        padding: 30px 0;
+    }
+
+    .image-container {
+        border: solid 1px #00000017;
+        padding: 5px;
+        box-shadow: 0 0 5px #0000002d;
+        margin-top: 30px;
+    }
+
+    .tuning-gift .image-container img {
+        width: 100%;
+    }
+
+    .tuning-gift .tuning-controls {
+        padding: 30px 25px;
+        margin: 20px 10px;
+        border: solid 1px #0000003b;
+        border-radius: 10px;
+    }
+
+    .tuning-gift .form-group {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    .tuning-gift h2 {
+        text-align: center;
+        font-size: 20px;
+        margin: 10px 0;
+        border-top: solid 1px #00000029;
+        padding: 20px 0 15px 0;
+        line-height: 20px;
+    }
+
+    .tuning-gift input,
+    .tuning-gift select {
+        padding: 7px 20px;
+        height: 35px;
+        display: block;
+        margin-bottom: 10px;
+        width: 100%;
+        background-color: whitesmoke;
+        border: solid 1px #f5f5f5;
+        box-shadow: 0 0 1px #00000014;
+        border-radius: 30px;
+        margin: 0;
+    }
+
+    .tuning-gift input[type="color"] {
+        background: none;
+        height: 30px;
+        width: 100%;
+        padding: 0;
+        border: solid 1px #b9b9b9;
+        overflow: hidden;
+    }
+
+    .tuning-gift input[type="color"]::-webkit-color-swatch-wrapper {
+        padding: 0;
+    }
+
+    .tuning-gift input[type="color"]::-webkit-color-swatch {
+        border: none;
+        border-radius: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .tuning-gift input[type="number"] {
+        direction: ltr;
+        text-align: center;
+    }
+
+    .tuning-gift select {
+        padding: 0 20PX;
+        direction: ltr;
+        text-align: left;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: none;
+    }
+
+
+    .tuning-gift input:focus,
+    .tuning-gift select:focus {
+        color: #212529;
+        background-color: #fff;
+        border-color: #86b7fe;
+        outline: 0;
+        box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25);
+    }
+
+
+    .loading {
+        opacity: 0.5;
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .loading::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 3px solid #ccc;
+        border-top-color: #555;
+        animation: rotate 1s linear infinite;
+    }
+
+    @keyframes rotate {
+        to {
+            transform: translate(-50%, -50%) rotate(360deg);
+        }
+    }
+
+    .button-container {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 !important;
+        display: flex !important;
+        justify-content: space-evenly;
+    }
+
+    .preview-btn {
+        background-color: transparent;
+        border: 2px solid #008CBA;
+        color: #008CBA;
+        font-size: 16px;
+        padding: 10px;
+        width: 50% !important;
+        box-sizing: border-box;
+        cursor: pointer;
+    }
+
+    .save-btn {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        font-size: 16px;
+        padding: 10px;
+        width: 50% !important;
+        box-sizing: border-box;
+        cursor: pointer;
+    }
+
+    .save-btn:hover {
+        background-color: #3e8e41;
+    }
+
+    a.goback-link {
+        display: inline-block;
+        width: 100%;
+        padding: 5px;
+        text-align: center;
+        margin-top: 19px;
+        color: #008CBA;
+        transition: all ease-in-out 0.2s;
+    }
+
+    a.goback-link:hover {
+        color: #0018ba;
+    }
+</style>
+<link rel='stylesheet' id='bootstrap-css' href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css'
+    type='text/css' media='all' />
+
+<div class="container tuning-gift">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="image-container">
+                <img src="[image-src]" alt="Your Image">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="tuning-controls">
+                <form id="tuning_form" class="form-horizontal" action="/action_page.php">
+                    <input type="hidden" name="image_dir" value="[image-dir]">
+                    <input type="hidden" name="product_id" value="[product-id]">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="name_1">إسم المرسل:</label>
+                                <div style="flex:1;">
+                                    <input type="text" class="form-control" id="name_1" placeholder="أدخل إسم المرسل"
+                                        name="name_1" value="مثال لإسم الشخص الأول">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="name_2">إسم المستلم:</label>
+                                <div style="flex:1;">
+                                    <input type="text" class="form-control" id="name_2" placeholder="أدخل إسم المسلتم"
+                                        name="name_2" value="مثال لإسم الشخص الثاني">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <h2>المرسل</h2>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="name_1_color">اللون:</label>
+                                <div style="flex:1;">
+                                    <input type="color" class="form-control" id="name_1_color" name="name_1_color"
+                                        value="[name_1_color]">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="name_1_font_size">الحجم:</label>
+                                <div style="flex:1;">
+                                    <input type="number" class="form-control" id="name_1_font_size"
+                                        name="name_1_font_size" value="18">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="name_1_right">يمين:</label>
+                                <div style="flex:1;">
+                                    <input type="number" class="form-control" id="name_1_right" name="name_1_right"
+                                        value="[name_1_right]">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="name_1_top">أعلى:</label>
+                                <div style="flex:1;">
+                                    <input type="number" class="form-control" id="name_1_top" name="name_1_top"
+                                        value="[name_1_top]">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="name_1_font">الخط:</label>
+                                <div style="flex:1;">
+                                    <select class="select-font" name="name_1_font" id="name_1_font"
+                                        data-value="[name_1_font]">
+                                        [font-options]
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <h2>المستلم</h2>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="name_2_color">اللون:</label>
+                                <div style="flex:1;">
+                                    <input type="color" class="form-control" id="name_2_color" name="name_2_color"
+                                        value="[name_2_color]">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="name_2_font_size">الحجم:</label>
+                                <div style="flex:1;">
+                                    <input type="number" class="form-control" id="name_2_font_size"
+                                        name="name_2_font_size" value="[name_2_font_size]">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="name_2_right">يمين:</label>
+                                <div style="flex:1;">
+                                    <input type="number" class="form-control" id="name_2_right" name="name_2_right"
+                                        value="[name_2_right]">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="name_2_top">أعلى:</label>
+                                <div style="flex:1;">
+                                    <input type="number" class="form-control" id="name_2_top" name="name_2_top"
+                                        value="[name_2_top]">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="name_2_font">الخط:</label>
+                                <div style="flex: 1;">
+                                    <select class="select-font" name="name_2_font" id="name_2_font"
+                                        data-value="[name_2_font]">
+                                        [font-options]
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <hr style="margin: 20px 0;">
+                    </div>
+                </form>
+                <div class="row button-container">
+                    <button class="preview-btn">معاينة</button>
+                    <button class="save-btn">حفظ</button>
+                </div>
+                <div>
+                    <a class="goback-link" href="[permalink]">« الرجوع لصفحة البطاقة</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    jQuery(document).ready(function ($) {
+        $('.select-font').each(function () {
+            var dataValue = $(this).data('value');
+            $(this).find('option[value="' + dataValue + '"]').prop('selected', true);
+        });
+
+        setTimeout(() => {
+            $("form#tuning_form").submit();
+        }, 500);
+        $('.preview-btn').click(function () {
+            $("form#tuning_form").submit();
+        });
+        $('.save-btn').click(function () {
+
+            $("form#tuning_form").submit();
+
+            // Get the form data as an array
+            var formArray = $("form#tuning_form").serializeArray();
+
+            // Add custom data to the array
+            formArray.push({ name: "rand", value: Math.random() });
+            formArray.push({ name: "save_tuning", value: "1" });
+
+            // Convert the array back to a serialized string
+            var formData = $.param(formArray);
+
+
+            srvloader();
+
+            $.ajax({
+                type: 'POST',
+                url: '[home_url]/?save_tuning', // Replace with your backend endpoint
+                dataType: "json",
+                data: formData,
+                success: function (response) {
+                    console.log(response);
+                    if (response['ok'] === true) {
+                        notic('تم الحفظ بنجاح', 'success');
+                    } else {
+                        notic('عفوا، حدث خطأ في الحفظ', 'error');
+                    }
+                    srvloader(true);
+                },
+                error: function (error) {
+                    console.log(error);
+                    notic('عفوا، حدث خطأ غير معروف. لم يتم الحفظ', 'error');
+                    srvloader(true);
+                }
+            });
+
+        });
+
+        $("form#tuning_form").submit(function (event) {
+            // Prevent the form from submitting
+            event.preventDefault();
+
+            // Get the form data as an array
+            var formArray = $(this).serializeArray();
+
+            // Add custom data to the array
+            formArray.push({ name: "rand", value: Math.random() });
+            formArray.push({ name: "tuning_gift", value: "1" });
+
+            // Convert the array back to a serialized string
+            var formData = $.param(formArray);
+
+            // Construct the URL with the form data
+            var imageUrl = "[home_url]/?" + formData;
+
+            // Add the loading class to the image
+            $("img").addClass("loading");
+
+            // Change the image src
+            $("img").attr("src", imageUrl);
+
+            // Remove the loading class when the new src has loaded
+            $("img").on("load", function () {
+                $(this).removeClass("loading");
+            });
+        });
+
+    });
+</script>

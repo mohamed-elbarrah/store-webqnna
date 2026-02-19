@@ -1,0 +1,254 @@
+
+<div class="afterdonate" style="display: none;">
+    <hr style="border: 0;border-top: solid 1px #00000021;">
+    <div class="card-content">
+        <div class="amount">
+            <span>المبلغ</span><i>ر.س.</i>
+            <input type="number" name="amount" maxlength="6" placeholder="المبلغ" min="1" max="250000" value="" style="padding: 6px 55px 7px 47px;">
+        </div>
+        <button class="donate-btn-e" data-product_id="">تبرع الآن</button>
+    </div>
+</div>
+<script>
+    jQuery(document).ready(function($){
+        
+    /**************  share button ****************/
+
+    $('.share-icon').click(function(e) {
+        e.preventDefault();
+        var winHeight = 350,
+            winWidth = 520,
+            winTop = (screen.height / 2) - (winHeight / 2),
+            winLeft = (screen.width / 2) - (winWidth / 2),
+            link = $(this).data('share');
+        window.open(link, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
+    });
+    
+        $('ul.products li.product a:not(:first-child), ul.products li.product span.price').hide();
+        $('ul.products li.product a:not(:first-child), ul.products li.product span.price').attr('style', 'display: none !important;');
+        $('ul.products li.product').append($('.afterdonate').html());
+        var product_ids;
+        $('ul.products li.product').each(function(i, obj) {
+            var price = $(this).find('span.price').html();
+            var product_id = $(this).find('a:not(:first-child)').data('product_id');
+            $(this).find('.donate-btn-e').data('product_id', product_id);
+            $(this).addClass('pid_' + product_id);
+            $(this).append('<div>'+product_id+'</div>');
+            product_ids += "," + product_id;
+        });
+        $.get($('.home_url').val() + '/?checkproducts=' +product_ids + '&rand=' + Math.random() + '&getTime=' + new Date().getTime(), function(data){
+                var elements = JSON.parse(data);
+                elements.forEach(element => {
+                    var product_id          = element['product_id'];
+                    var custom_donate       = element['custom_donate'];
+                    var has_custom_donate   = element['has_custom_donate'];
+                    var price               = element['price'];
+                    var first_btn = false;
+                    var first_btn_value = 0;
+                    if(has_custom_donate)
+                    if(custom_donate.length != 0){
+                        var s = '';
+                        custom_donate.forEach(element => {
+                            if(!first_btn){
+                                first_btn = true;
+                                first_btn_value = element[1];
+                                s += '<div class="btn_share selected" data-share="'+element[1]+'">'+element[0]+'</div>';
+                            }else{
+                                s += '<div class="btn_share" data-share="'+element[1]+'">'+element[0]+'</div>';
+                            }
+                            
+                        });
+                        var b = '<div class="input_spinner" data-share="50.00"><button class="spinner-btn btn btn-primary btn-sm" data-dir="down">-</button><input type="number" name="shares" maxlength="3" value="1" placeholder="عدد الأسهم" min="1" max="200"><button class="spinner-btn btn btn-primary btn-sm" data-dir="up">+</button></div>';
+                        $('.pid_' + product_id).find('.card-content').prepend('<div class="btns-share">'+s+'</div>' + b);
+                        $('.pid_' + product_id).find('.amount input').addClass('disable-input');
+                        $('.pid_' + product_id).find('.amount input').val(first_btn_value);
+                    }
+
+                    if(!$('.pid_' + product_id).find('.amount input').val().replace(/[^0-9]/, '').replace(/,/g, '').replace(/[^0-9]/, ''))
+                    $('.pid_' + product_id).find('.amount input').val(price);
+
+                });
+            });
+        $(document).on('click', '.btn_share', function(){
+            var share = $(this).data('share');
+            var $input = $(this).parents('.card-content').find('.amount input');
+            if(share){
+                $input.val(share);
+                $input.addClass('disable-input');
+                $(this).parents('.card-content').find('.input_spinner').slideDown();
+            }else{
+                share = 0;
+                $input.val('');
+                $input.removeClass('disable-input');
+            $(this).parents('.card-content').find('.input_spinner').slideUp();
+            }
+
+            $(this).parents('.card-content').find('.input_spinner').data('share', share);
+            $(this).parents('.card-content').find('.input_spinner input').val('1');
+            $(this).parents('.card-content').find('.btn_share').removeClass('selected');
+            $(this).addClass('selected');
+        });
+        if($('.p-container-shortcode').length && $('.p-container-shortcode').parents('.mhc_section > div'))
+        $('.p-container-shortcode').parents('.mhc_section > div').addClass('mhc_section_min');
+        $('.donate-btn-e').click(function(){
+            var home_url = $('.home_url').val();
+            var product_id = $(this).data('product_id');
+            var price = $(this).parents('li.product').find('input').val();
+            var url = home_url + '/?addtocard&product_id='+product_id+'&price=' + price + '&rand=[rand]&getTime=' + new Date().getTime();
+            srvloader();
+            $.get(url, function(data){
+                location.replace($('.cart_url').val());
+            });
+        });
+        $(document).on('click', '.spinner-btn', function(){
+            var input = $(this).parents('.input_spinner').find('input');
+            var share = parseInt($(this).parents('.input_spinner').data('share'));
+            var n = parseInt(input.val());
+            if($(this).data('dir') == 'up'){
+                input.val(n + 1);
+            }else{
+                input.val(n - 1);
+            }
+            if(parseInt(input.val()) < 1){
+                input.val(1);
+                n = 1;
+            }
+            if($(this).parents('.post-card').find('.amount input').length){
+                $(this).parents('.post-card').find('.amount input').val(share * parseInt(input.val()));
+            }else if($(this).parents('.d-card').find('.amount input').length){
+                $(this).parents('.d-card').find('.amount input').val(share * parseInt(input.val()));
+            }else if($(this).parents('li.product').find('.amount input').length){
+                $(this).parents('li.product').find('.amount input').val(share * parseInt(input.val()));
+            }else if($(this).parents('.qscard').find('.amount input').length){
+                $(this).parents('.qscard').find('.amount input').val(share * parseInt(input.val()));
+            }else if($(this).parents('.g-container').find('.amount input').length){
+                $(this).parents('.g-container').find('.amount input').val(share * parseInt(input.val()));
+            }
+            
+        });
+
+        /* New Edit =>> adding comma after every 3 digits [for input with attr name "amount"]*/
+        $('input[name="amount"]').on('input change', function(){
+            $(this).val($(this).val().replace(/[^0-9]/, '').replace(/,/g, '').replace(/[^0-9]/, '').replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") );
+            $(this).removeAttr('maxlength');
+            $(this).removeAttr('min');
+            $(this).removeAttr('max');
+            $(this).attr('type', 'text');
+        });
+
+        $('.progress_bar span').each(function(){
+            $(this).html($(this).html().replace(/[^0-9]/, '').replace(/,/g, '').replace(/[^0-9]/, '').replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") );
+        });
+
+        $('.qscard .donate-btn a').click(function(){
+            var home_url = $('.home_url').val();
+            var product_id = $(this).parents('.qscard').data('id');
+            var price = $(this).parents('.qscard').find('.amount input').val().replace(/[^0-9]/, '').replace(/,/g, '').replace(/[^0-9]/, '');
+            if(!price){
+                notic('يرجى إدخال مبلغ !', 'error');
+                return;
+            }
+            var url = home_url + '/?addtocard&product_id='+product_id+'&price=' + price + '&rand=[rand]&getTime=' + new Date().getTime();
+            srvloader();
+            $.get(url, function(data){
+                location.replace($('.cart_url').val());
+            });
+        });
+
+        $('.qscard .cart-donate-btn a').click(function(){
+            var home_url = $('.home_url').val();
+            var product_id = $(this).parents('.qscard').data('id');
+            var price = $(this).parents('.qscard').find('.amount input').val().replace(/[^0-9]/, '').replace(/,/g, '').replace(/[^0-9]/, '');
+            if(!price){
+                notic('يرجى إدخال مبلغ !', 'error');
+                return;
+            }
+            var url = home_url + '/?addtocard&product_id='+product_id+'&price=' + price + '&rand=[rand]&getTime=' + new Date().getTime();
+            srvloader();
+            $.get(url, function(data){
+                $(document.body).trigger('wc_fragment_refresh');
+                srvloader(true);
+                notic('تمت الاضافة للسلة', 'success');
+            });
+        });
+
+        $('.p-card .donate-btn a').click(function(){
+            var home_url = $('.home_url').val();
+            var product_id = $(this).parents('.post-card').data('id');
+            var price = $(this).parents('.post-card').find('.amount input').val().replace(/[^0-9]/, '').replace(/,/g, '').replace(/[^0-9]/, '');
+            var url = home_url + '/?addtocard&product_id='+product_id+'&price=' + price + '&rand=[rand]&getTime=' + new Date().getTime();
+            srvloader();
+            $.get(url, function(data){
+                location.replace($('.cart_url').val());
+            });
+        });
+        $('.p-container .donate-btn a').click(function(){
+            var home_url = $('.home_url').val();
+            var product_id = $(this).parents('.post-card').data('id');
+            var price = $(this).parents('.post-card').find('.amount input').val().replace(/[^0-9]/, '').replace(/,/g, '').replace(/[^0-9]/, '');
+            var url = home_url + '/?addtocard&product_id='+product_id+'&price=' + price + '&rand=[rand]&getTime=' + new Date().getTime();
+            srvloader();
+            $.get(url, function(data){
+                location.replace($('.cart_url').val());
+            });
+        });
+
+        $(document).on('click', '.g-container .donate-btn a', function(){
+            var product_id;
+            var parent;
+            
+            if($(this).parents('.post-card').length)parent = $(this).parents('.post-card');
+            else parent = $(this).parents('.g-container');
+
+            product_id = parent.data('id');
+            var price = parent.find('.amount input').val().replace(/[^0-9]/, '').replace(/,/g, '').replace(/[^0-9]/, '');
+            $('.gifts_popup').fadeIn('fast');
+            $('#product_id_input').val(product_id);
+            $('#price_input').val(price);
+        });
+
+        $('.gifts_popup .close').click(function(){
+            $('.gifts_popup').fadeOut('fast');
+        });
+        
+        $(".gifts_popup form").submit(function(e) {
+
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+
+            var form = $(this);
+            srvloader();
+            $.ajax({
+                type: "POST",
+                url: $('.home_url').val() + '/?sendgift&rand=' + Math.random().toString(),
+                data: form.serialize(),
+                success: function(data)
+                {
+                    if(data == 1){
+                        location.replace($('.cart_url').val());
+                    }else{
+                        alert(data);
+                    }
+                    srvloader(true);
+                }
+            });
+        });
+
+        $('.input_spinner input').on('input', function(){
+            var this_val = $(this).val();
+            if(!$.isNumeric(this_val) || this_val < 1){
+                this_val = 1;
+                $(this).val(this_val);
+            }
+            var share = parseInt($(this).parents('.input_spinner').data('share'));
+            $(this).parents('.post-card').find('.amount input').val(share * this_val);
+        });
+        $('.p-donate-switch').click(function() {
+            var bottom = $(this).parents('.p-donate-2').css('bottom');
+            if(bottom == '-140px'){
+                $(this).parents('.p-donate-2').css('bottom', '0px')
+            }else{
+                $(this).parents('.p-donate-2').css('bottom', '-140px');
+            }
+        });
+    })
+</script>
