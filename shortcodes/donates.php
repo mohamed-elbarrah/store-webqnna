@@ -99,7 +99,42 @@
                 .progress-green span {
                     background-color: #2a8165;
                 }
+                /* Donate option buttons: make full rounded rectangular layout (two columns)
+                   Keep colors/background/hover behaviors unchanged; only adjust spacing, size and radius */
+                .btns-share{
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 8px;
+                    margin-top: 14px;
+                    align-items: center;
+                    padding: 6px 0;
+                }
+
+                .btns-share .btn_share{
+                    box-sizing: border-box;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 28px;
+                    font-size: 12px;
+                    font-weight: 700;
+                    text-align: center;
+                    cursor: pointer;
+                    white-space: normal;
+                }
+                    /* If a label is long, make it occupy the full row (span both columns) */
+                    .btns-share .btn_share--full{ grid-column: 1 / -1; }
             </style>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function(){
+                        try{
+                            document.querySelectorAll('.btns-share .btn_share').forEach(function(el){
+                                var text = (el.textContent || '').trim();
+                                if(text.length > 20) el.classList.add('btn_share--full');
+                            });
+                        }catch(e){/* fail silently */}
+                    });
+                </script>
             <div class="donates-container<?=($two_in_row)?' two-in-a-row':''?>">
             <?php
             while ($p->have_posts()){
