@@ -53,6 +53,12 @@
         ob_start();
 
         $p = new WP_Query($args);
+        // get currency symbol from WooCommerce if available
+        if(function_exists('get_woocommerce_currency_symbol')){
+            $currency_symbol = get_woocommerce_currency_symbol();
+        }else{
+            $currency_symbol = 'ر.س';
+        }
         if( $p->have_posts() ) {
             ?>
             <style>
@@ -115,7 +121,7 @@
                     display: inline-flex;
                     align-items: center;
                     justify-content: center;
-                    border-radius: 28px;
+                    border-radius: 12px;
                     font-size: 12px;
                     font-weight: 700;
                     text-align: center;
@@ -127,23 +133,23 @@
 
                 /* Redesigned footer: amount box, quantity selector and action buttons */
                 .donates-container .qscard .d-card-footer .d-footer-btns{ display: flex !important; flex-direction:column;}
-                .donates-container .qscard .d-footer-btns .d-footer-row.top{ display: flex !important; gap:8px; align-items:center;  }
+                .donates-container .qscard .d-footer-btns .d-footer-row.top{ display: flex !important; gap:4px; align-items:end;  }
 
-                .donation-box{ flex:1; background:#F5F5F5; border-radius:16px; padding:14px 16px; display:flex; flex-direction:column; justify-content:center; text-align:right; min-height:72px; border:1.5px dashed #e6eef3; }
+                .donation-box{ flex:1; background:#F5F5F5; border-radius:16px; display:flex; flex-direction:column; justify-content:center; text-align:right; min-height:72px; border:1.5px dashed #e6eef3; }
                 .donation-label{ font-size:13px; color:#9aa6ab; margin-bottom:6px; }
-                .amount{ position:relative; display:flex; align-items:center; justify-content:flex-end; }
-                .amount .amount-input{ font-size:24px; font-weight:700; border:0; background:transparent; text-align:right; padding:0; width:100%; color:#0f1720; }
-                .amount .currency{ position:absolute; right:14px; color:#0f1720; font-weight:700; font-size:16px; }
+                .amount{ position:relative; display:flex; align-items:center; justify-content:flex-start; }
+                .amount .amount-input{ font-size:24px; font-weight:700; border:0; background:transparent; padding:0 0 0 28px; width:100%; color:#0f1720; }
+                .amount .currency{ position:absolute; left:14px; color:#0f1720; font-weight:700; font-size:16px; }
 
-                .qty-box{  background:#ffffff; border-radius:16px; display:flex; align-items:center; justify-content:center; gap:8px; padding:4px; box-shadow: 0 1px 4px rgba(0,0,0,0.03);  border:1px solid #f3f3f3; }
-                .qty-box .spinner-btn{ background:transparent; border:0; font-size:22px; font-weight:700; padding:4px 8px; cursor:pointer; }
+                .qty-box{  background:#ffffff; border-radius:12px; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow: 0 1px 4px rgba(0,0,0,0.03);  border:1px solid #f3f3f3; }
+                .qty-box .spinner-btn{ background:transparent; border:0; font-size:18px; font-weight:900;  cursor:pointer; }
                 .qty-box .spinner-btn[data-dir="up"]{ color:#1E6B3A; }
                 .qty-box .spinner-btn[data-dir="down"]{ color:#222; }
                 .qty-box .qty-input{ width:44px; text-align:center; border:0; background:transparent; font-weight:700; font-size:18px; }
 
-                .donates-container .qscard .d-footer-row.buttons{ width: 100%; display:flex !important; gap:8px; }
+                .donates-container .qscard .d-footer-row.buttons{ width: 100%; display:flex !important; }
                 .donates-container .qscard .d-footer-row.buttons .donate-btn, .donates-container .qscard .d-footer-row.buttons .cart-donate-btn{ flex:1; }
-                .donates-container .qscard .d-footer-row.buttons .donate-btn a, .donates-container .qscard .d-footer-row.buttons .cart-donate-btn a{ display:block; text-decoration:none; color:#fff; border-radius:16px; text-align:center; font-size:14px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+                .donates-container .qscard .d-footer-row.buttons .donate-btn a, .donates-container .qscard .d-footer-row.buttons .cart-donate-btn a{ display:block; text-decoration:none; color:#fff; border-radius:12px; text-align:center; font-size:14px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
                 .donates-container .qscard .d-footer-row.buttons .donate-btn a{ background:#1E6B3A; }
                 .donates-container .qscard .d-footer-row.buttons .cart-donate-btn a{ background:#C15A00; }
                 .donate-btn .btn-arrow{ margin-left:8px; }
@@ -262,8 +268,8 @@
                                     <div class="donation-box">
                                         <label class="donation-label">قيمة التبرع</label>
                                         <div class="amount">
+                                            <span class="currency"><?= esc_html( $currency_symbol ) ?></span>
                                             <input type="numeric" class="<?=($has_custom_donate)?'disable-input':''?> amount-input" name="amount" maxlength="6" placeholder="الملبغ" min="1" max="250000" value="">
-                                            <span class="currency">ر.س</span>
                                         </div>
                                     </div>
 
