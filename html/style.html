@@ -1123,7 +1123,20 @@
     /* box-shadow: 0px 3px 5px 0px rgb(0 0 0 / 20%); */
     transition: all 0.4s ease;
     position: relative;
-    padding-bottom: 65px;
+    padding-bottom: 12px; /* reserve small spacing when footer is in flow */
+  }
+  /* make each card a column flex container so footer can stick to bottom */
+  .donates-container {
+    align-items: stretch;
+  }
+  .donates-container .d-card {
+    display: flex;
+    flex-direction: column;
+  }
+  .donates-container .d-card .card-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
   }
   .donates-container .card-title {
     text-align: center;
@@ -1140,13 +1153,14 @@
   .donates-container .card-content .amount {
     border-radius: 0;
   }
+  /* Keep footer in normal flow so it doesn't overlap card content */
+  /* Keep footer in normal flow and push it to the bottom of the card */
   .d-card-footer {
     padding: 0px 8px;
     background: #f3f3f3;
-    position: absolute;
-    left: 0;
-    bottom: 0;
+    position: relative;
     width: 100%;
+    margin-top: auto;
   }
   .d-footer-btns {
    
